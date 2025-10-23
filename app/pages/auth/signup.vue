@@ -5,19 +5,34 @@ definePageMeta({
     layout: "auth",
 });
 const registerInput = ref({
-    email: "",
+    email: "baslm8496@gmail.com",
     password: "",
 });
+const loading = ref(false);
 const rules = {
     email: { required, email }, // Matches state.email
     password: { required }, // Matches state.lastName
 };
 
 const v$ = useVuelidate(rules, registerInput);
-
 const submitForm = async () => {
     const isInvalid = v$.value.$validate();
     if (!isInvalid) return;
+
+    loading.value = true;
+
+    try {
+        const res = await $fetch("/api/auth/register", {
+            method: "POST",
+            body: JSON.stringify(registerInput.value),
+        });
+
+        console.log("res", res);
+    } catch (error) {
+        console.log("error", error);
+    } finally {
+        loading.value = false;
+    }
 };
 </script>
 <template>
@@ -35,7 +50,7 @@ const submitForm = async () => {
                     <FormError :errors="v$.email.$errors">
                         <BaseInput v-model="registerInput.password" :type="'password'" :placeholder="'Enter your password '" />
                     </FormError>
-                    <BaseBtn @click="submitForm" :label="'Sign Up'" :loading="true" />
+                    <BaseBtn @click="submitForm" :label="'Sign Up'" :loading="loading" />
 
                     <p class="text-sm font-normal text-center text-gray-700 dark:text-gray-500 sm:text-start">
                         Already have an account?
