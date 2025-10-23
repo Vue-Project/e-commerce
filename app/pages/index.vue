@@ -1,5 +1,5 @@
 <template>
     <div class="bg-slate-200 h-screen">
-        <p>Some default layout content shared across all pages</p>
+        <p>welcome page to Home page</p>
     </div>
 </template>
