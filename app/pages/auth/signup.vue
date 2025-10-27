@@ -45,10 +45,10 @@ const submitForm = async () => {
 
                     {{ registerInput }}
                     <FormError :errors="v$.email.$errors">
-                        <BaseInput v-model="registerInput.email" :type="'text'" :placeholder="'info@gmail.com'" />
+                        <BaseInput v-model="registerInput.email" :type="'text'" :placeholder="'info@gmail.com'" id="email" />
                     </FormError>
-                    <FormError :errors="v$.email.$errors">
-                        <BaseInput v-model="registerInput.password" :type="'password'" :placeholder="'Enter your password '" />
+                    <FormError :errors="v$.password.$errors">
+                        <BaseInput v-model="registerInput.password" :type="'password'" :placeholder="'Enter your password '" id="password" />
                     </FormError>
                     <BaseBtn @click="submitForm" :label="'Sign Up'" :loading="loading" />
 
