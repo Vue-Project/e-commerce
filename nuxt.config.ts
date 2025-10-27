@@ -4,6 +4,7 @@ export default defineNuxtConfig({
 
     modules: [
         "@nuxtjs/tailwindcss",
+        "nuxt-nodemailer",
         // "@prisma/nuxt",
         "@pinia/nuxt",
     ],
@@ -14,6 +15,17 @@ export default defineNuxtConfig({
         },
     ],
     devtools: { enabled: true },
+    nodemailer: {
+        from: '"E-commerce app" <noreply@app.com>',
+        host: process.env.MAIL_HOST,
+        port: Number(process.env.MAIL_PORT),
+        secure: false,
+        auth: {
+            user: process.env.MAIL_TRAP_USER,
+            pass: process.env.MAIL_TRAP_PASSWORD,
+        },
+    },
+
     runtimeConfig: {
         //private: is accessible only on the server
         JWT_TOKEN_KEY: process.env.JWT_TOKEN_KEY,
