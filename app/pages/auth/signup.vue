@@ -1,13 +1,14 @@
 <script setup>
 import { useVuelidate } from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
+
 definePageMeta({
     layout: "auth",
 });
-const registerInput = ref({
-    email: "baslm8496@gmail.com",
-    password: "",
-});
+const router = useRouter();
+const signUpStore = useSignUpStore();
+const { registerInput } = storeToRefs(signUpStore);
+
 const loading = ref(false);
 const rules = {
     email: { required, email }, // Matches state.email
@@ -28,6 +29,7 @@ const submitForm = async () => {
         });
 
         console.log("res", res);
+        router.push("/auth/email-verification");
     } catch (error) {
         console.log("error", error);
     } finally {

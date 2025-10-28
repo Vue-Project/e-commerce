@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import VOtpInput from "vue3-otp-input";
+import { successMsg } from "../../../utils/toast-notfacation";
 
 const otpInput = ref<InstanceType<typeof VOtpInput> | null>(null);
 const bindModal = ref("");
+const router = useRouter();
 
 const handleOnComplete = (value: string) => {
+    registerInput.value.otpCode = value;
     console.log("OTP completed: ", value);
 };
 
@@ -21,25 +24,56 @@ const fillInput = (value: string) => {
     console.log(value);
     otpInput.value?.fillInput(value);
 };
+const loading = ref(false);
+const signUpStore = useSignUpStore();
+const { registerInput } = storeToRefs(signUpStore);
+const verifyEmail = async () => {
+    loading.value = true;
+
+    try {
+        const res = await $fetch("/api/auth/email-verification", {
+            method: "POST",
+            body: JSON.stringify(registerInput.value),
+        });
+        successMsg(res?.message);
+        router.push("/auth/signin");
+
+        console.log("res", res);
+    } catch (error) {
+        console.log("error", error);
+    } finally {
+        loading.value = false;
+    }
+};
 </script>
 <template>
-    <div style="display: flex; flex-direction: row">
-        <v-otp-input
-            ref="otpInput"
-            input-classes="otp-input"
-            :conditionalClass="['one', 'two', 'three', 'four']"
-            separator="-"
-            inputType="letter-numeric"
-            :num-inputs="4"
-            v-model:value="bindValue"
-            :should-auto-focus="true"
-            :should-focus-order="true"
-            @on-change="handleOnChange"
-            @on-complete="handleOnComplete"
-            :placeholder="['*', '*', '*', '*']" />
+    <div class="bg-white h-screen">
+        <div class="flex justify-between">
+            <div></div>
+            <div class="w- mt-20">
+                <div class="flex flex-col gap-2">
+                    {{ registerInput }},
+                    <h1 class="text-2xl mb-3">E-mail verification</h1>
+                    <v-otp-input
+                        ref="otpInput"
+                        input-classes="otp-input"
+                        :conditionalClass="['one', 'two', 'three', 'four']"
+                        separator=""
+                        inputType="letter-numeric"
+                        :num-inputs="6"
+                        v-model:value="bindValue"
+                        :should-auto-focus="true"
+                        :should-focus-order="true"
+                        @on-change="handleOnChange"
+                        @on-complete="handleOnComplete"
+                        :placeholder="['*', '*', '*', '*']" />
+
+                    <BaseBtn class="w-[100%]" @click="verifyEmail" :loading="loading" label="Verify your Email Adress"></BaseBtn>
+                </div>
+            </div>
+            <div></div>
+        </div>
     </div>
-    <button @click="clearInput()">Clear Input</button>
-    <button @click="fillInput('2929')">Fill Input</button>
 </template>
 <style>
 .otp-input {

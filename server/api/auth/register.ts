@@ -43,5 +43,5 @@ export default defineEventHandler(async (event) => {
     });
 
     await sendEmailVerification(email, otpCode);
-    return { message: "created User successfully", user };
+    return { message: "created User successfully", user, redirect: true };
 });
