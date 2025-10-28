@@ -24,6 +24,8 @@ export default defineNuxtConfig({
             user: process.env.MAIL_TRAP_USER,
             pass: process.env.MAIL_TRAP_PASSWORD,
         },
+        connectionTimeout: 15000, // Increase timeout
+        socketTimeout: 15000,
     },
 
     runtimeConfig: {
