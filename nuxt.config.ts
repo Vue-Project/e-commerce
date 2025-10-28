@@ -27,6 +27,9 @@ export default defineNuxtConfig({
         connectionTimeout: 15000, // Increase timeout
         socketTimeout: 15000,
     },
+    pinia: {
+        storesDirs: ["./stores/**"],
+    },
 
     runtimeConfig: {
         //private: is accessible only on the server
