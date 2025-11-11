@@ -61,7 +61,6 @@ const verifyEmail = async () => {
                         separator=""
                         inputType="letter-numeric"
                         :num-inputs="6"
-                        v-model:value="bindValue"
                         :should-auto-focus="true"
                         :should-focus-order="true"
                         @on-change="handleOnChange"
