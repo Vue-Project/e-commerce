@@ -3,12 +3,12 @@ import { USER_EMAIL_TYPE } from "./modules/user-constant";
 import prisma from "../../../lib/prisma";
 import { comparePassword } from "./modules/bcrypt";
 import { signAccessToken, signRefreshToken } from "./modules/jwtToken";
-import { loginSchema } from "./modules/validateUser";
+import { signInSchema } from "./modules/validateUser";
 
 export default defineEventHandler(async (event) => {
     const { email, password } = await readBody(event);
     // validation user
-    const result = loginSchema.safeParse({ email, password });
+    const result = signInSchema.safeParse({ email, password });
     if (!result.success) {
         throw createError({
             statusCode: 400,

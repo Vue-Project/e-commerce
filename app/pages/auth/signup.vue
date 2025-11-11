@@ -12,6 +12,7 @@ const { registerInput } = storeToRefs(signUpStore);
 
 const loading = ref(false);
 const rules = {
+    name: { required }, // Matches state.firstName
     email: { required, email }, // Matches state.email
     password: { required }, // Matches state.lastName
 };
@@ -47,6 +48,9 @@ const submitForm = async () => {
                 <div class="flex flex-col gap-2">
                     <h1 class="text-2xl mb-3">Sign Up</h1>
 
+                    <FormError :errors="v$.name.$errors">
+                        <BaseInput v-model="registerInput.name" :type="'text'" :placeholder="'Enter your name'" id="name" />
+                    </FormError>
                     <FormError :errors="v$.email.$errors">
                         <BaseInput v-model="registerInput.email" :type="'text'" :placeholder="'info@gmail.com'" id="email" />
                     </FormError>

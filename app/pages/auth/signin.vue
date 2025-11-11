@@ -16,6 +16,9 @@ const rules = {
 const loading = ref(false);
 const v$ = useVuelidate(rules, loginInput);
 
+const userCookie = useCookie("user", userCookieSettings);
+const router = useRouter();
+
 const submitForm = async () => {
     const isInvalid = v$.value.$validate();
     if (!isInvalid) return;
@@ -23,14 +26,16 @@ const submitForm = async () => {
     loading.value = true;
 
     try {
-        console.log("JWT_TOKEN_KEY:", process.env.JWT_TOKEN_KEY);
-        console.log("REFRESH_TOKEN_KEY:", process.env.REFRESH_TOKEN_KEY);
+        // console.log("JWT_TOKEN_KEY:", process.env.JWT_TOKEN_KEY);
+        // console.log("REFRESH_TOKEN_KEY:", process.env.REFRESH_TOKEN_KEY);
         const res = await $fetch("/api/auth/login", {
             method: "POST",
             body: JSON.stringify(loginInput.value),
         });
 
         console.log("res", res);
+        userCookie.value = res;
+        router.push("/admin/dashboard");
     } catch (error) {
         showSignInAndSignUpError(error);
         // console.log("error", errors);
