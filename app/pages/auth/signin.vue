@@ -2,6 +2,7 @@
 import { useVuelidate } from "@vuelidate/core";
 import { required, email } from "@vuelidate/validators";
 import { showSignInAndSignUpError } from "~~/utils/user-messageError";
+import { userCookieSettings } from "~~/utils/user.cookie.settings";
 definePageMeta({
     layout: "auth",
 });
