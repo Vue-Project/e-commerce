@@ -1,4 +1,6 @@
 <script setup>
+import { markRaw } from "vue";
+
 import CategoryIcon from "~/components/icons/CategoryIcon.vue";
 import DashboardIcon from "~/components/icons/DashboardIcon.vue";
 import PaymentIcon from "~/components/icons/PaymentIcon.vue";
@@ -10,27 +12,27 @@ const links = ref([
     {
         menu: "Dashboard",
         link: "/admin/dashboard",
-        icon: DashboardIcon,
+        icon: markRaw(DashboardIcon),
     },
     {
         menu: "Categories",
         link: "/admin/categories",
-        icon: CategoryIcon,
+        icon: markRaw(CategoryIcon),
     },
     {
         menu: "Products",
         link: "/admin/products",
-        icon: ProductIcon,
+        icon: markRaw(ProductIcon),
     },
     {
         menu: "Payments",
         link: "/admin/payments",
-        icon: PaymentIcon,
+        icon: markRaw(PaymentIcon),
     },
     {
         menu: "Users",
         link: "/admin/users",
-        icon: UserIcon,
+        icon: markRaw(UserIcon),
     },
 ]);
 const drawerOpen = ref(true);

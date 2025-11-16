@@ -1,6 +1,7 @@
 <template>
     <div class="bg-slate-200 h-screen">
-        <h1>categories</h1>
+        <CategoryModal :show="true" />
+        <!-- <CategoryTable :categories="categories" /> -->
     </div>
 </template>
 
