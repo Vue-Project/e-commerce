@@ -12,7 +12,7 @@ const loading = ref(false);
 const submitForm = async () => {
     loading.value = true;
     try {
-        const categoryEditPoint = edit.value ? `/update-category/${categoryInput.value.id}` : `/create-category`;
+        const categoryEditPoint = edit.value ? `/update-category/` : `/create-category`;
         const res = await $fetch(`/api/admin/category${categoryEditPoint}`, {
             method: "POST",
             body: JSON.stringify(categoryInput.value),
@@ -20,6 +20,7 @@ const submitForm = async () => {
         edit.value = false;
         emit("getCategory");
         successMsg(res?.message);
+        categoryInput.value = "";
     } catch (error) {
         showSignInAndSignUpError(error);
     } finally {
@@ -40,7 +41,7 @@ const submitForm = async () => {
 
         <template #footer>
             <BaseBtn class="bg-gray-400" label="Close" @click="emit('toggleCategoryModal')"></BaseBtn>
-            <BaseBtn label="save" @click="submitForm" :loading="loading"></BaseBtn>
+            <BaseBtn :label="edit ? 'Update' : 'Save'" @click="submitForm" :loading="loading"></BaseBtn>
         </template>
     </BaseModal>
 </template>

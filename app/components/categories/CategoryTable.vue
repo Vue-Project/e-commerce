@@ -30,5 +30,4 @@ const emit = defineEmits(["editCategory"]);
             </tr>
         </tbody>
     </table>
-    {{ props.categories }}
 </template>
