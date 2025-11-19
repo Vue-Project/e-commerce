@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     if (!result.success) {
         throw createError({
             statusCode: 400,
-            statusMessage: "validation flailed",
+            statusMessage: " the name must be at least 3 characters long",
             data: result.error.flatten(),
         });
     }
