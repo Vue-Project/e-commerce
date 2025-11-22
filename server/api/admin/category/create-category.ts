@@ -1,6 +1,6 @@
 // pages/api/auth/register.ts
 import prisma from "../../../../lib/prisma";
-import { categorySchema } from "./modules/category-valadation";
+import { categorySchema } from "./modules/category-validation";
 
 export default defineEventHandler(async (event) => {
     const { name } = await readBody(event);

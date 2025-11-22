@@ -14,6 +14,7 @@ definePageMeta({
 });
 const categoryStore = useCategoryStore();
 const { categoryInput, edit } = storeToRefs(categoryStore);
+const { data, getCategory } = await categoryStore.fetchCategories();
 
 const showModal = ref(false);
 const toggleCategoryModal = () => {
@@ -24,11 +25,6 @@ const editCategory = (category) => {
     edit.value = true;
     toggleCategoryModal();
 };
-const { data, refresh: getCategory } = useFetch("/api/admin/category/get-category", {
-    headers: {
-        Accept: "application/json",
-    },
-});
 </script>
 
 <style lang="scss" scoped></style>

@@ -2,6 +2,7 @@
 const props = defineProps(["categories"]);
 
 const emit = defineEmits(["editCategory"]);
+const loading = ref(false);
 </script>
 <template>
     <table class="bg-white rounded-md w-full shadow-sm border border-gray-300">
