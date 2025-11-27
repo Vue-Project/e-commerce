@@ -1,4 +1,6 @@
 import { defineStore } from "pinia";
+import { successMsg } from "~~/utils/toast-notfacation";
+import { showSignInAndSignUpError } from "~~/utils/user-messageError";
 
 export const useProductStore = defineStore("product-store", () => {
     const productInput = ref({
@@ -14,7 +16,7 @@ export const useProductStore = defineStore("product-store", () => {
     const page = ref(1);
     const limit = ref(10);
     const fetchProducts = async () => {
-        const { data } = useFetch("/api/admin/product/get", {
+        const data = await $fetch("/api/admin/product/get", {
             headers: {
                 Accept: "application/json",
             },
@@ -24,9 +26,21 @@ export const useProductStore = defineStore("product-store", () => {
                 limit: limit.value,
             },
         });
-        productData.value = data.value;
+        productData.value = data;
         limit.value = productData.value?.metadata?.limit || 10;
         page.value = productData.value?.metadata?.page || 1;
+    };
+    const deleteProduct = async (id: number) => {
+        try {
+            const res = await $fetch(`/api/admin/product/delete`, {
+                method: "DELETE",
+                body: JSON.stringify({ id: id }),
+            });
+
+            successMsg(res?.message);
+        } catch (error) {
+            showSignInAndSignUpError(error);
+        }
     };
     const changePage = async (newPage: number) => {
         page.value = newPage;
@@ -39,5 +53,6 @@ export const useProductStore = defineStore("product-store", () => {
         search,
         productData,
         changePage,
+        deleteProduct,
     };
 });

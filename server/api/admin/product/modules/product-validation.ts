@@ -16,3 +16,6 @@ export const productSchema = z.object({
     price: z.number().positive("Price should be greater than 0"),
     categoryId: z.number().positive("Category should be greater than 0"),
 });
+export const deleteProductSchema = z.object({
+    id: z.number().positive("id should be a  number"),
+});

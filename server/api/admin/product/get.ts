@@ -22,9 +22,11 @@ export default defineEventHandler(async (event) => {
                 category: true,
                 images: true,
             },
+            // 2-1*limit=10
             skip: (page - 1) * limit,
             take: limit,
         }),
+
         prisma.product.count({
             where: search
                 ? {
@@ -36,24 +38,6 @@ export default defineEventHandler(async (event) => {
                 : {},
         }),
     ]);
-
-    // const products = await prisma.product.findMany({
-    //     where: search
-    //         ? {
-    //               name: {
-    //                   contains: search,
-    //                   mode: "insensitive",
-    //               },
-    //           }
-    //         : {},
-    //     orderBy: {
-    //         createdAt: "desc",
-    //     },
-    //     include: {
-    //         category: true,
-    //         images: true,
-    //     },
-    // });
 
     return {
         products,

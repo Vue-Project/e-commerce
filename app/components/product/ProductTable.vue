@@ -1,7 +1,7 @@
 <script setup>
 import { _debounce } from "../../../utils/_debounce";
 const props = defineProps(["productData"]);
-const emit = defineEmits(["editProduct"]);
+const emit = defineEmits(["editProduct", "deleteProduct"]);
 const loading = ref(false);
 const productStore = useProductStore();
 const { search } = storeToRefs(productStore);
@@ -29,13 +29,24 @@ const searchProduct = _debounce(async (event) => {
         </thead>
 
         <tbody>
-            <tr class="bg-gray-100 text-left" v-for="(product, index) in productData?.products" :key="product.id">
-                <td class="border border-gray-300 py-2 px-4">{{ index + 1 }}</td>
-                <td class="border border-gray-300 py-2 px-4">{{ product.name }}</td>
-                <td class="border border-gray-300 py-2 px-4">{{ product.price }} $</td>
-                <td class="border border-gray-300 py-2 px-4">{{ product.color }}</td>
-                <td class="border border-gray-300 py-2 px-4">{{ product.category?.name }}</td>
-                <td class="border border-gray-300 py-2 px-4">Action</td>
+            <tr class="text-left" v-for="(product, index) in productData?.products || []" :key="product.id">
+                <td class="border border-gray-300 py-2 px-4">
+                    {{ index + 1 }}
+                </td>
+
+                <td class="border border-gray-300 py-2 px-4">{{ product?.name }}</td>
+                <td class="border border-gray-300 py-2 px-4">{{ product?.category?.name }}</td>
+                <td class="border border-gray-300 py-2 px-4">{{ product?.color }}</td>
+                <td class="border border-gray-300 py-2 px-4">{{ product?.price }} $</td>
+
+                <td class="flex border border-gray-300 py-2 px-4">
+                    <button @click="emit('editProduct', product)" class="flex justify-center hover:bg-slate-200 text-gray-900 font-bold py-2 px-4 rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="loading">
+                        <EditIcon />
+                    </button>
+                    <button @click="emit('deleteProduct', product)" class="flex justify-center hover:bg-slate-200 text-gray-900 font-bold py-2 px-4 rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="loading">
+                        <TrashIcon />
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -44,10 +55,9 @@ const searchProduct = _debounce(async (event) => {
         <div>
             <button class="px-4 py-2 bg-gray-200 rounded disabled:opacity-50" :disabled="productData?.metadata?.page === 1" @click="productStore.changePage(productData?.metadata?.page - 1)">Prev</button>
 
-            <span>Page {{ s?.metadata?.page }} of {{ productData?.metadata?.totalPages }}</span>
+            <span>Page {{ productData?.metadata?.page }} of {{ productData?.metadata?.totalPages }}</span>
 
             <button class="px-4 py-2 bg-gray-200 rounded disabled:opacity-50" :disabled="productData?.metadata?.page === productData?.metadata?.totalPages" @click="productStore.changePage(productData?.metadata?.page + 1)">Next</button>
         </div>
-        <div></div>
     </div>
 </template>

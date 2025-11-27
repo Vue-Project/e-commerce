@@ -24,7 +24,7 @@ const submitForm = async () => {
         edit.value = false;
         emit("getProducts");
         successMsg(res?.message);
-        productInput.value = "";
+        productInput.value = {};
     } catch (error) {
         showSignInAndSignUpError(error);
     } finally {

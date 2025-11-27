@@ -1,25 +1,26 @@
 <template>
     <div class="bg-slate-200 h-screen">
-        <!-- <p>data:{{ productData?.products }}</p> -->
         <div class="mb-4 p-4">
-            <ProductTable :productData="productData" @editProduct="editProduct">
-                <template #btn>
-                    <BaseBtn label="Create" @click="toggleProductModal"></BaseBtn>
-                    <ProductModal :show="showModal" :categories="data?.categories" @toggleProductModal="toggleProductModal" />
-                </template>
-            </ProductTable>
+            <ClientOnly>
+                <ProductTable :productData="productData" @editProduct="editProduct" @deleteProduct="deleteProduct">
+                    <template #btn>
+                        <BaseBtn label="Create" @click="toggleProductModal"></BaseBtn>
+                        <ProductModal :show="showModal" :categories="data?.categories" @toggleProductModal="toggleProductModal" @getProducts="productStore.fetchProducts" />
+                    </template>
+                </ProductTable>
+            </ClientOnly>
         </div>
     </div>
 </template>
 
 <script setup>
+import { promptUser } from "../../../utils/sweetAlert";
 definePageMeta({
     layout: "admin",
 });
 // product store to manage product modal state
 const productStore = useProductStore();
 const { productInput, edit, productData } = storeToRefs(productStore);
-// const { getProducts } =
 await productStore.fetchProducts();
 
 // category store to get categories for product modal
@@ -34,6 +35,16 @@ const editProduct = (product) => {
     productInput.value = product;
     edit.value = true;
     toggleProductModal();
+};
+const deleteProduct = async (product) => {
+    promptUser("Are you sure you want to delete this product?")
+        .then(async () => {
+            await productStore.deleteProduct(product?.id);
+            productStore.fetchProducts();
+        })
+        .catch((error) => {
+            console.log("Error during deletion:", error?.message);
+        });
 };
 </script>
 
