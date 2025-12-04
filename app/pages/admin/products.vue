@@ -2,11 +2,12 @@
     <div class="bg-slate-200 h-screen">
         <div class="mb-4 p-4">
             <ClientOnly>
-                <ProductTable :productData="productData" @editProduct="editProduct" @deleteProduct="deleteProduct" @uploadImage="uploadImage">
+                <ProductTable :productData="productData" @editProduct="editProduct" @deleteProduct="deleteProduct" @uploadImage="uploadImage" @ShowUploadedImages="ShowUploadedImages">
                     <template #btn>
                         <BaseBtn label="Create" @click="toggleProductModal"></BaseBtn>
                         <ProductModal :show="showModal" :categories="data?.categories" @toggleProductModal="toggleProductModal" @getProducts="productStore.fetchProducts" />
-                        <UploadImageModal />
+                        <UploadImageModal @getProducts="productStore.fetchProducts" />
+                        <ShowUploadImages />
                     </template>
                 </ProductTable>
             </ClientOnly>
@@ -21,7 +22,7 @@ definePageMeta({
 });
 // product store to manage product modal state
 const productStore = useProductStore();
-const { productInput, edit, productData, productId, showUploadedImageModal } = storeToRefs(productStore);
+const { productInput, edit, productData, productId, showUploadedImageModal, productImagesList, showUploadedImagesModal } = storeToRefs(productStore);
 await productStore.fetchProducts();
 
 // category store to get categories for product modal
@@ -50,6 +51,10 @@ const deleteProduct = async (product) => {
 const uploadImage = (product) => {
     productId.value = product?.id;
     showUploadedImageModal.value = true;
+};
+const ShowUploadedImages = (product) => {
+    productImagesList.value = product?.images;
+    showUploadedImagesModal.value = true;
 };
 </script>
 

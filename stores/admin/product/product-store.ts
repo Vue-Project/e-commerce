@@ -17,6 +17,8 @@ export const useProductStore = defineStore("product-store", () => {
     const limit = ref(10);
     const productId = ref(null);
     const showUploadedImageModal = ref(false);
+    const showUploadedImagesModal = ref(false);
+    const productImagesList = ref([]);
     const fetchProducts = async () => {
         const data = await $fetch("/api/admin/product/get", {
             headers: {
@@ -81,5 +83,7 @@ export const useProductStore = defineStore("product-store", () => {
         uploadImagePayload,
         productId,
         showUploadedImageModal,
+        showUploadedImagesModal,
+        productImagesList,
     };
 });

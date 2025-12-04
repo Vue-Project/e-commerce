@@ -1,7 +1,7 @@
 <script setup>
 import { _debounce } from "../../../utils/_debounce";
 const props = defineProps(["productData"]);
-const emit = defineEmits(["editProduct", "deleteProduct", "uploadImage"]);
+const emit = defineEmits(["editProduct", "deleteProduct", "uploadImage", "ShowUploadedImages"]);
 const loading = ref(false);
 const productStore = useProductStore();
 const { search } = storeToRefs(productStore);
@@ -48,6 +48,9 @@ const searchProduct = _debounce(async (event) => {
                     </button>
                     <button @click="emit('uploadImage', product)" class="flex justify-center hover:bg-slate-200 text-gray-900 font-bold py-2 px-4 rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="loading">
                         <ImageIcon />
+                    </button>
+                    <button @click="emit('ShowUploadedImages', product)" class="flex justify-center hover:bg-slate-200 text-gray-900 font-bold py-2 px-4 rounded flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" :disabled="loading">
+                        <EyeIcon />
                     </button>
                 </td>
             </tr>

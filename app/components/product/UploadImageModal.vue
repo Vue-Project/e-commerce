@@ -34,6 +34,7 @@ const uploadImage = async () => {
             const response = await $fetch("/api/admin/product/upload-image", requestOptions);
             successMsg(response?.message);
             document.querySelector("#outputImage").src = "";
+            emit("getProducts");
             document.querySelector("#imageInput").value = "";
         } else {
             showError("No image selected");
