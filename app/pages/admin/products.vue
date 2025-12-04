@@ -2,10 +2,11 @@
     <div class="bg-slate-200 h-screen">
         <div class="mb-4 p-4">
             <ClientOnly>
-                <ProductTable :productData="productData" @editProduct="editProduct" @deleteProduct="deleteProduct">
+                <ProductTable :productData="productData" @editProduct="editProduct" @deleteProduct="deleteProduct" @uploadImage="uploadImage">
                     <template #btn>
                         <BaseBtn label="Create" @click="toggleProductModal"></BaseBtn>
                         <ProductModal :show="showModal" :categories="data?.categories" @toggleProductModal="toggleProductModal" @getProducts="productStore.fetchProducts" />
+                        <UploadImageModal />
                     </template>
                 </ProductTable>
             </ClientOnly>
@@ -20,7 +21,7 @@ definePageMeta({
 });
 // product store to manage product modal state
 const productStore = useProductStore();
-const { productInput, edit, productData } = storeToRefs(productStore);
+const { productInput, edit, productData, productId, showUploadedImageModal } = storeToRefs(productStore);
 await productStore.fetchProducts();
 
 // category store to get categories for product modal
@@ -45,6 +46,10 @@ const deleteProduct = async (product) => {
         .catch((error) => {
             console.log("Error during deletion:", error?.message);
         });
+};
+const uploadImage = (product) => {
+    productId.value = product?.id;
+    showUploadedImageModal.value = true;
 };
 </script>
 

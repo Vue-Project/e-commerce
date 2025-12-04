@@ -15,6 +15,8 @@ export const useProductStore = defineStore("product-store", () => {
     const productData = ref<any>(null);
     const page = ref(1);
     const limit = ref(10);
+    const productId = ref(null);
+    const showUploadedImageModal = ref(false);
     const fetchProducts = async () => {
         const data = await $fetch("/api/admin/product/get", {
             headers: {
@@ -46,6 +48,28 @@ export const useProductStore = defineStore("product-store", () => {
         page.value = newPage;
         await fetchProducts();
     };
+    const uploadImagePayload = (productId: number, file: string) => {
+        return new Promise((resolve, reject) => {
+            try {
+                const formData = new FormData();
+
+                // formData.append("Authorization", headers?.Authorization);
+                formData.append("file", file);
+                formData.append("productId", productId.toString());
+
+                const requestOptions = {
+                    headers: {
+                        Accept: "application/json",
+                    },
+                    method: "POST",
+                    body: formData,
+                };
+                resolve(requestOptions);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    };
     return {
         productInput,
         edit,
@@ -54,5 +78,8 @@ export const useProductStore = defineStore("product-store", () => {
         productData,
         changePage,
         deleteProduct,
+        uploadImagePayload,
+        productId,
+        showUploadedImageModal,
     };
 });
