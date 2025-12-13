@@ -7,6 +7,7 @@ import PaymentIcon from "~/components/icons/PaymentIcon.vue";
 import ProductIcon from "~/components/icons/ProductIcon.vue";
 import UserIcon from "~/components/icons/UserIcon.vue";
 import { userCookieSettings } from "~~/utils/user.cookie.settings";
+const userCookie = useCookie("user", userCookieSettings);
 
 const links = ref([
     {
@@ -40,7 +41,10 @@ const showMenu = ref(false);
 const toggleDrawer = () => {
     drawerOpen.value = !drawerOpen.value;
 };
-const userCookie = useCookie("user", userCookieSettings);
+const logoutUser = () => {
+    userCookie.value = null;
+    window.location.href = "/admin/signin";
+};
 </script>
 
 <template>
@@ -86,7 +90,7 @@ const userCookie = useCookie("user", userCookieSettings);
                                 </p>
                             </div>
                             <ul>
-                                <li @click="$logout()">
+                                <li @click="logoutUser()">
                                     <a class="block text-red-500 px-4 py-2 hover:bg-gray-100">Logout</a>
                                 </li>
                             </ul>

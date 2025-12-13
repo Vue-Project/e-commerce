@@ -60,7 +60,7 @@ export const useProductStore = defineStore("product-store", () => {
             try {
                 const formData = new FormData();
 
-                formData.append("Authorization", headers?.Authorization);
+                // formData.append("Authorization", headers?.Authorization);
                 formData.append("file", file);
                 formData.append("productId", productId.toString());
 

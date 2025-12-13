@@ -15,7 +15,7 @@ definePageMeta({
 // user store to manage user modal state
 const userStore = useUserStore();
 const { usersData, userError } = storeToRefs(userStore);
-// await userStore.fetchUsers();
+await userStore.fetchUsers();
 const { $isAuthenticated } = useNuxtApp();
 
 onMounted(async () => {
