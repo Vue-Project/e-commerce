@@ -1,9 +1,8 @@
 <template>
+    <!-- {{ $isAuthenticated(userError.value) }} -->
     <div class="bg-slate-200 h-screen">
         <div class="mb-4 p-4">
-            <ClientOnly>
-                <UserTable :usersData="usersData" />
-            </ClientOnly>
+            <UserTable :usersData="usersData" />
         </div>
     </div>
 </template>
@@ -15,9 +14,17 @@ definePageMeta({
 });
 // user store to manage user modal state
 const userStore = useUserStore();
-const { fetchUsers, usersData } = storeToRefs(userStore);
-await userStore.fetchUsers();
-const showModal = ref(false);
+const { usersData, userError } = storeToRefs(userStore);
+// await userStore.fetchUsers();
+const { $isAuthenticated } = useNuxtApp();
+
+onMounted(async () => {
+    await userStore.fetchUsers();
+    $isAuthenticated(userError);
+    if (userError.value) {
+        $isAuthenticated(userError);
+    }
+});
 </script>
 
 <style lang="scss" scoped></style>

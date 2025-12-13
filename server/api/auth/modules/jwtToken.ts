@@ -35,3 +35,15 @@ export function signRefreshToken(userId: number) {
         });
     });
 }
+export function verifyToken(accessToken: string) {
+    return new Promise<{ message: string } | any>((resolve) => {
+        const key = process.env.JWT_TOKEN_KEY;
+        jwt.verify(accessToken, key, (error: any, payload: any) => {
+            if (error) {
+                resolve({ message: "invalid_token" });
+            } else {
+                resolve(payload);
+            }
+        });
+    });
+}

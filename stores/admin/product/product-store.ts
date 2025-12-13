@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { successMsg } from "~~/utils/toast-notfacation";
 import { showSignInAndSignUpError } from "~~/utils/user-messageError";
+import { useHeaders } from "../../../utils/http-headers";
 
 export const useProductStore = defineStore("product-store", () => {
     const productInput = ref({
@@ -19,10 +20,11 @@ export const useProductStore = defineStore("product-store", () => {
     const showUploadedImageModal = ref(false);
     const showUploadedImagesModal = ref(false);
     const productImagesList = ref([]);
+    const headers = useHeaders();
     const fetchProducts = async () => {
         const data = await $fetch("/api/admin/product/get", {
             headers: {
-                Accept: "application/json",
+                ...headers,
             },
             query: {
                 search: search.value,
@@ -38,6 +40,9 @@ export const useProductStore = defineStore("product-store", () => {
         try {
             const res = await $fetch(`/api/admin/product/delete`, {
                 method: "DELETE",
+                headers: {
+                    ...headers,
+                },
                 body: JSON.stringify({ id: id }),
             });
 
@@ -55,13 +60,13 @@ export const useProductStore = defineStore("product-store", () => {
             try {
                 const formData = new FormData();
 
-                // formData.append("Authorization", headers?.Authorization);
+                formData.append("Authorization", headers?.Authorization);
                 formData.append("file", file);
                 formData.append("productId", productId.toString());
 
                 const requestOptions = {
                     headers: {
-                        Accept: "application/json",
+                        ...headers,
                     },
                     method: "POST",
                     body: formData,

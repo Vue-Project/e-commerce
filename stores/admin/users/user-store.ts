@@ -1,15 +1,18 @@
 import { defineStore } from "pinia";
+import { useHeaders } from "../../../utils/http-headers";
 
 export const useUserStore = defineStore("user-store", () => {
     const search = ref("");
     const usersData = ref<any>(null);
     const page = ref(1);
     const limit = ref(10);
+    const headers = useHeaders();
+    const userError = ref<any>(null);
 
     const fetchUsers = async () => {
-        const data = await $fetch("/api/admin/user/get", {
+        const { data, refresh, error } = await useFetch("/api/admin/user/get", {
             headers: {
-                Accept: "application/json",
+                ...headers,
             },
             query: {
                 search: search.value,
@@ -17,6 +20,7 @@ export const useUserStore = defineStore("user-store", () => {
                 limit: limit.value,
             },
         });
+        userError.value = error;
         usersData.value = data;
         limit.value = usersData.value?.metadata?.limit || 10;
         page.value = usersData.value?.metadata?.page || 1;
@@ -32,5 +36,6 @@ export const useUserStore = defineStore("user-store", () => {
         fetchUsers,
         search,
         changePage,
+        userError,
     };
 });

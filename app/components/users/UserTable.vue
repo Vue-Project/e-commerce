@@ -4,12 +4,12 @@ import { _debounce } from "../../../utils/_debounce";
 const props = defineProps(["usersData"]);
 const loading = ref(false);
 const userStore = useUserStore();
-const { fetchUsers } = storeToRefs(userStore);
+const { search } = storeToRefs(userStore);
 
 const searchUser = _debounce(async (event) => {
     console.log(event[0].target.value);
     search.value = event[0].target.value;
-    await userStore.fetchProducts();
+    await userStore.fetchUsers();
 }, 1000);
 </script>
 <template>

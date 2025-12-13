@@ -11,3 +11,11 @@ export const showSignInAndSignUpError = (error: any) => {
         }
     }
 };
+
+// export function isAuthenticatedError(error: Ref<any>) {
+//     const statusCode = error.value?.statusCode;
+//     if (statusCode === 401) {
+//         window.location.href = "/auth/signin";
+//         showErrorMsg("Unauthorized! Please sign in again.");
+//     }
+// }

@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { useHeaders } from "../../../utils/http-headers";
 
 export const useCategoryStore = defineStore("category-store", () => {
     const categoryInput = ref({
@@ -6,10 +7,11 @@ export const useCategoryStore = defineStore("category-store", () => {
         name: "",
     });
     const edit = ref(false);
+    const headers = useHeaders();
     const fetchCategories = async () => {
         const { data, refresh: getCategory } = useFetch("/api/admin/category/get-category", {
             headers: {
-                Accept: "application/json",
+                ...headers,
             },
         });
         return { data, getCategory };
