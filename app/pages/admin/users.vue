@@ -17,9 +17,9 @@ const userStore = useUserStore();
 const { usersData, userError } = storeToRefs(userStore);
 await userStore.fetchUsers();
 const { $isAuthenticated } = useNuxtApp();
+await userStore.fetchUsers();
 
 onMounted(async () => {
-    await userStore.fetchUsers();
     $isAuthenticated(userError);
     if (userError.value) {
         $isAuthenticated(userError);

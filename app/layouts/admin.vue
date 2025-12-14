@@ -43,7 +43,7 @@ const toggleDrawer = () => {
 };
 const logoutUser = () => {
     userCookie.value = null;
-    window.location.href = "/admin/signin";
+    window.location.href = "/auth/signin";
 };
 </script>
 

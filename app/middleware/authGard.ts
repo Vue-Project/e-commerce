@@ -10,7 +10,7 @@ export async function authGuard(event: H3Event) {
     }
 
     const token = authHeader.split(" ")[1];
-    const verifyTokenData = await verifyToken(token + "nugi3niu");
+    const verifyTokenData = await verifyToken(token);
 
     if (verifyTokenData?.message === "invalid_token") {
         throw createError({ statusCode: 401, statusMessage: "Unauthorized" });
