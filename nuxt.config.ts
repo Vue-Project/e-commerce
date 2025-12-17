@@ -7,6 +7,8 @@ export default defineNuxtConfig({
         "nuxt-nodemailer",
         // "@prisma/nuxt",
         "@pinia/nuxt",
+        "@nuxt/icon",
+        "@nuxt/image",
     ],
     components: [
         {
@@ -36,5 +38,8 @@ export default defineNuxtConfig({
         JWT_TOKEN_KEY: process.env.JWT_TOKEN_KEY,
         REFRESH_TOKEN_KEY: process.env.REFRESH_TOKEN_KEY,
         DATABASE_URL: process.env.DATABASE_URL,
+    },
+    tailwindcss: {
+        exposeConfig: true,
     },
 });

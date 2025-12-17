@@ -2,6 +2,7 @@ import { Product } from "./../../../../node_modules/.prisma/client/index.d";
 // pages/api/auth/register.ts
 import prisma from "../../../../lib/prisma";
 import { productSchema } from "./modules/product-validation";
+import { slugify } from "slugify";
 
 export default defineEventHandler(async (event) => {
     const { name, price, color, categoryId } = await readBody(event);
@@ -19,6 +20,7 @@ export default defineEventHandler(async (event) => {
     const product = await prisma.product.create({
         data: {
             name: name,
+            slug: slugify(name),
             color: color,
             categoryId: categoryId,
             price: price.toString(),

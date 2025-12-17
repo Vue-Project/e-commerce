@@ -21,6 +21,7 @@ export const useProductStore = defineStore("product-store", () => {
     const showUploadedImagesModal = ref(false);
     const productImagesList = ref([]);
     const headers = useHeaders();
+    const productColors = ref(["Red", "Blue", "Green", "Yellow", "Black", "White", "Purple", "Orange", "Pink", "Brown", "Gray", "Cyan", "Magenta", "Lime"]);
     const fetchProducts = async () => {
         const data = await $fetch("/api/admin/product/get", {
             headers: {
@@ -90,5 +91,6 @@ export const useProductStore = defineStore("product-store", () => {
         showUploadedImageModal,
         showUploadedImagesModal,
         productImagesList,
+        productColors,
     };
 });
