@@ -1,8 +1,7 @@
-import { Product } from "./../../../../node_modules/.prisma/client/index.d";
 // pages/api/auth/register.ts
 import prisma from "../../../../lib/prisma";
 import { productSchema } from "./modules/product-validation";
-import { slugify } from "slugify";
+import slugify from "slugify";
 
 export default defineEventHandler(async (event) => {
     const { name, price, color, categoryId } = await readBody(event);

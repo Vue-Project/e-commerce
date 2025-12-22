@@ -16,9 +16,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const product = await prisma.product.delete({
-        where: {
-            id: id,
-        },
+        where: { id: parseInt(id) },
     });
 
     return { message: "Deleted Product successfully", product };
