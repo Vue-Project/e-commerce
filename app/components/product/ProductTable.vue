@@ -21,9 +21,9 @@ const searchProduct = _debounce(async (event) => {
             <tr class="bg-gray-100 text-left">
                 <td class="border border-gray-300 py-2 px-4">#</td>
                 <td class="border border-gray-300 py-2 px-4">Name</td>
-                <td class="border border-gray-300 py-2 px-4">Price</td>
-                <td class="border border-gray-300 py-2 px-4">color</td>
                 <td class="border border-gray-300 py-2 px-4">categories</td>
+                <td class="border border-gray-300 py-2 px-4">color</td>
+                <td class="border border-gray-300 py-2 px-4">Price</td>
                 <td class="border border-gray-300 py-2 px-4">Action</td>
             </tr>
         </thead>

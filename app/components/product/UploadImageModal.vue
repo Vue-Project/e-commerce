@@ -59,7 +59,7 @@ const uploadImage = async () => {
 
         <template #footer>
             <BaseBtn @click="showUploadedImageModal = false" class="bg-gray-400" label="Close"></BaseBtn>
-            <BaseBtn @click="uploadImage" label="upload image" :loading="loading"></BaseBtn>
+            <BaseBtn @click="uploadImage" label="upload image"></BaseBtn>
         </template>
     </BaseModal>
 </template>

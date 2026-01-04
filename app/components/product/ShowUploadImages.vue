@@ -9,8 +9,8 @@ const { showUploadedImagesModal, productImagesList } = storeToRefs(productStore)
         </template>
 
         <template #body>
-            <div class="flex gap-4">
-                <img v-for="image in productImagesList" :key="image.url" :src="image.url" style="height: 100px" :alt="image.id" />
+            <div class="grid grid-cols-5 gap-4">
+                <img v-for="image in productImagesList" :key="image.url" :src="image.url" :alt="image.id" class="w-full h-24 object-cover rounded" />
             </div>
         </template>
 
