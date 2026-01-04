@@ -69,7 +69,7 @@ function displayMissingStars(starPercents) {
         <!-- Review form -->
         <!-- Review form -->
 
-        <ReviewForm v-show="show"></ReviewForm>
+        <!-- <ReviewForm v-show="show"></ReviewForm> -->
         <!-- end Review form  -->
         <!-- end Review form  -->
         <!-- end Review form  -->

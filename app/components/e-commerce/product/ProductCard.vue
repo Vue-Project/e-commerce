@@ -4,7 +4,6 @@ const props = defineProps(["productData"]);
 const imgWidth = 280;
 const imgHeight = Math.round(imgWidth * 1.125);
 const config = useRuntimeConfig();
-
 const FALL_BACK_IMG_URL = config?.public?.FALL_BACK_IMG_URL;
 </script>
 

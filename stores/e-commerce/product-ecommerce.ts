@@ -11,6 +11,8 @@ export const useProductEcomStore = defineStore("productEcom-store", () => {
     const selectedCategories = ref<number[]>([]);
     const selectedColors = ref<string[]>([]);
     const selectedPrices = ref<number[]>([]);
+    const singleProductData = ref<any>(null);
+    const sameCategoryProduct = ref<any>(null);
 
     const fetchProducts = async (categories?: number[], prices?: number[], colors?: string[]) => {
         const data = await $fetch("/api/e-commerce/get-products", {
@@ -31,6 +33,30 @@ export const useProductEcomStore = defineStore("productEcom-store", () => {
         limit.value = productData.value?.metadata?.limit || 10;
         page.value = productData.value?.metadata?.page || 1;
     };
+    const fetchSingleProductData = async (slug: string) => {
+        const data = await $fetch("/api/e-commerce/single-product", {
+            headers: {
+                ...headers,
+            },
+            query: {
+                slug: slug,
+            },
+        });
+
+        singleProductData.value = data;
+    };
+    const fetchProductWithSameCategory = async (categoryId: number) => {
+        const data = await $fetch("/api/e-commerce/get-same-category", {
+            headers: {
+                ...headers,
+            },
+            query: {
+                categoryId: categoryId,
+            },
+        });
+
+        sameCategoryProduct.value = data;
+    };
 
     return {
         edit,
@@ -40,5 +66,9 @@ export const useProductEcomStore = defineStore("productEcom-store", () => {
         selectedColors,
         selectedPrices,
         selectedCategories,
+        fetchSingleProductData,
+        singleProductData,
+        fetchProductWithSameCategory,
+        sameCategoryProduct,
     };
 });

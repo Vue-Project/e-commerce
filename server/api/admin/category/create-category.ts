@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     if (!result.success) {
         throw createError({
             statusCode: 400,
-            statusMessage: " the name must be at least 3 characters long",
+            statusMessage: " the name must be at least 50 characters long",
             data: result.error.flatten(),
         });
     }
