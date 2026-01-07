@@ -38,10 +38,7 @@ function displayMissingStars(starPercents) {
     <div>
         <h4 class="font-semibold text-2xl text-gray-900">Customer Reviews</h4>
         <div class="my-2">
-            <!-- <StarRating
-        :rating="computeProductReview(singleProductData?.products)"
-        class="text-sm mr-2"
-      /> -->
+            <!-- <StarRating :rating="computeProductReview(singleProductData?.products)" class="text-sm mr-2" /> -->
         </div>
         <div class="my-4 bars">
             <!-- percent -->
@@ -69,7 +66,7 @@ function displayMissingStars(starPercents) {
         <!-- Review form -->
         <!-- Review form -->
 
-        <!-- <ReviewForm v-show="show"></ReviewForm> -->
+        <ReviewForm v-show="show"></ReviewForm>
         <!-- end Review form  -->
         <!-- end Review form  -->
         <!-- end Review form  -->
