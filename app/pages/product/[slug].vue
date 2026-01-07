@@ -4,8 +4,8 @@ const route = useRoute();
 
 const productEcomStore = useProductEcomStore();
 const { fetchSingleProductData, singleProductData, sameCategoryProduct } = storeToRefs(productEcomStore);
-// const productReviewStore = useProductReviewStore();
-// const { productReviewData } = storeToRefs(productReviewStore);
+const productReviewStore = useProductReviewStore();
+const { productReviewData } = storeToRefs(productReviewStore);
 
 const shoppingCartStore = useShoppingCartStore();
 const { shoppingCartData, showCart, defaultQuantity } = storeToRefs(shoppingCartStore);
@@ -14,7 +14,7 @@ productEcomStore.fetchSingleProductData(route.params?.slug).then(async () => {
     const categoryId = singleProductData.value?.products?.categoryId;
     const productId = singleProductData.value?.products?.id;
 
-    // await productReviewStore.fetchProductReviews(productId);
+    await productReviewStore.fetchProductReviews(productId);
     await productEcomStore.fetchProductWithSameCategory(categoryId);
 });
 </script>
