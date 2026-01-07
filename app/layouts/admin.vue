@@ -8,6 +8,9 @@ import ProductIcon from "~/components/icons/ProductIcon.vue";
 import UserIcon from "~/components/icons/UserIcon.vue";
 import { userCookieSettings } from "~~/utils/user.cookie.settings";
 const userCookie = useCookie("user", userCookieSettings);
+const config = useRuntimeConfig();
+
+const DEFAULT_USER_AVATAR = config?.public?.DEFAULT_USER_AVATAR;
 
 const links = ref([
     {
@@ -41,10 +44,11 @@ const showMenu = ref(false);
 const toggleDrawer = () => {
     drawerOpen.value = !drawerOpen.value;
 };
-const logoutUser = () => {
-    userCookie.value = null;
-    window.location.href = "/auth/signin";
-};
+const { $logout } = useNuxtApp();
+// const logoutUser = () => {
+//     userCookie.value = null;
+//     window.location.href = "/auth/signin";
+// };
 </script>
 
 <template>
@@ -78,7 +82,7 @@ const logoutUser = () => {
             <header class="bg-white shadow px-6 py-3 flex items-center justify-between">
                 <h1 class="text-lg font-semibold">Welcome Back!</h1>
                 <div class="relative" @click="showMenu = !showMenu">
-                    <img class="w-10 h-10 rounded-full cursor-pointer ring-2 ring-gray-300" src="https://i.pravatar.cc/150?img=3" alt="avatar" />
+                    <img class="w-10 h-10 rounded-full cursor-pointer ring-2 ring-gray-300" :src="DEFAULT_USER_AVATAR" alt="avatar" />
                     <transition name="fade">
                         <div v-if="showMenu" class="absolute right-0 mt-2 w-56 bg-white border rounded-lg shadow-lg z-50">
                             <div class="p-4 border-b">
@@ -90,7 +94,7 @@ const logoutUser = () => {
                                 </p>
                             </div>
                             <ul>
-                                <li @click="logoutUser()">
+                                <li @click="$logout()">
                                     <a class="block text-red-500 px-4 py-2 hover:bg-gray-100">Logout</a>
                                 </li>
                             </ul>

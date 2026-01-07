@@ -40,6 +40,7 @@ export default defineNuxtConfig({
         DATABASE_URL: process.env.DATABASE_URL,
         public: {
             FALL_BACK_IMG_URL: process.env.FALL_BACK_IMG_URL,
+            DEFAULT_USER_AVATAR: process.env.DEFAULT_USER_AVATAR,
         },
     },
     tailwindcss: {

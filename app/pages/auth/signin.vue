@@ -36,7 +36,7 @@ const submitForm = async () => {
 
         console.log("res", res);
         userCookie.value = res;
-        router.push("/admin/dashboard");
+        router.push("/");
     } catch (error) {
         showSignInAndSignUpError(error);
         // console.log("error", errors);
