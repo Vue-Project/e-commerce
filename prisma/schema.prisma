@@ -29,8 +29,14 @@ model Category {
   products Product[]
 
 }
-
-
+model ProductStar {
+  id         Int    @id @default(autoincrement())
+  productId  Int
+  receivedStars Int
+  product Product @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
 model ProductReview {
   id         Int    @id @default(autoincrement())
   userId     Int
@@ -54,6 +60,7 @@ model Product {
   category     Category             @relation(fields: [categoryId], references: [id])
   images       Image[]
   reviews      ProductReview[]
+  stars        ProductStar[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

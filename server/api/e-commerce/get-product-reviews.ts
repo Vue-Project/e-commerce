@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
         throw createError({
             statusCode: 400,
             statusMessage: "validation flailed",
-            data: [{ message: "productId should be a  Number" }],
+            data: [{ message: "productId should be a Number" }],
         });
     }
 

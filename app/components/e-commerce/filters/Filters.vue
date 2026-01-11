@@ -7,7 +7,7 @@ const productStore = useProductStore();
 const { productColors } = storeToRefs(productStore);
 
 const productEcomStore = useProductEcomStore();
-const { selectedCategories, selectedPrices, selectedColors } = storeToRefs(productEcomStore);
+const { selectedCategories, selectedPrices, selectedColors, selectedStar } = storeToRefs(productEcomStore);
 
 async function fetchProductByCategories(categories: number[]) {
     selectedCategories.value = categories;
@@ -23,10 +23,10 @@ async function fetchProductByPrice(prices: number[]) {
     await productEcomStore.fetchProducts(selectedCategories.value, selectedPrices.value, selectedColors.value);
 }
 
-// async function fetchProductByStars(starRating: number) {
-//     selectedStar.value = starRating;
-//     await productEcomStore.fetchProducts(selectedCategories.value, selectedPrices.value, selectedColors.value, selectedStar.value);
-// }
+async function fetchProductByStars(starRating: number) {
+    selectedStar.value = starRating;
+    await productEcomStore.fetchProducts(selectedCategories.value, selectedPrices.value, selectedColors.value, selectedStar.value);
+}
 </script>
 
 <template>

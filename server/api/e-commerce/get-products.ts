@@ -46,6 +46,10 @@ export default defineEventHandler(async (event) => {
             include: {
                 category: true,
                 images: true,
+                stars: true,
+                _count: {
+                    select: { reviews: true },
+                },
             },
             // 2-1*limit=10
             skip: (page - 1) * limit,

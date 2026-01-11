@@ -11,6 +11,7 @@ export const useProductEcomStore = defineStore("productEcom-store", () => {
     const selectedCategories = ref<number[]>([]);
     const selectedColors = ref<string[]>([]);
     const selectedPrices = ref<number[]>([]);
+    const selectedStar = ref<string[]>([]);
     const singleProductData = ref<any>(null);
     const sameCategoryProduct = ref<any>(null);
 
@@ -70,5 +71,6 @@ export const useProductEcomStore = defineStore("productEcom-store", () => {
         singleProductData,
         fetchProductWithSameCategory,
         sameCategoryProduct,
+        selectedStar,
     };
 });
