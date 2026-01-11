@@ -1,7 +1,5 @@
 <script setup>
-import { successMsg } from "~~/utils/toast-notfacation";
-import { showSignInAndSignUpError } from "~~/utils/user-messageError";
-
+import { showErrorMsg, successMsg } from "~~/utils/toast-notfacation";
 import { userCookieSettings } from "../../../../../utils/user.cookie.settings";
 
 const productEcomStore = useProductEcomStore();
@@ -38,7 +36,8 @@ async function addComment() {
         successMsg(res?.message);
     } catch (error) {
         loading.value = false;
-        showLoginOrSignUpError(error);
+        console.log("testing", error);
+        showErrorMsg(error?.data?.message);
     }
 }
 </script>
@@ -56,7 +55,8 @@ async function addComment() {
                         <div class="gap-1 flex justify-center mt-2 relative">
                             <label v-for="i in 5" :key="i" class="grid p-1 rounded" @click="getSelectedStarNumber(i)" :class="rating < i && i > hovered ? 'disable-star' : 'checked-star'">
                                 <input type="radio" class="overflow-hidden appearance-none opacity-0 absolute" name="rating" :value="i" v-model="rating" required aria-label=" input for start selected" />
-                                <StartIcon />
+
+                                <StarIcon :fill="'#FBBE24'" />
                             </label>
                         </div>
                     </div>
