@@ -1,4 +1,5 @@
 <script setup>
+import { computeProductReview } from "../../../../utils/compute-product-star";
 const props = defineProps(["productData"]);
 
 const imgWidth = 280;
@@ -10,7 +11,7 @@ const FALL_BACK_IMG_URL = config?.public?.FALL_BACK_IMG_URL;
 <template>
     <div class="relative group" v-for="product in productData?.products" :key="product?.id">
         <NuxtLink :to="`/product/${product?.slug}`" :title="product?.name">
-            <!-- <SaleBadge  class="absolute top-2 right-2" /> -->
+            <SaleBadge class="absolute top-2 right-2" />
             <NuxtImg
                 :width="imgWidth"
                 :height="imgHeight"
@@ -23,7 +24,7 @@ const FALL_BACK_IMG_URL = config?.public?.FALL_BACK_IMG_URL;
                 placeholder-class="blur-xl" />
         </NuxtLink>
         <div class="p-2">
-            <!-- <StarRating :rating="computeProductReview(product)" /> -->
+            <StarRating :rating="computeProductReview(product)" />
 
             <NuxtLink :to="`/product/${product?.slug}`" :title="product?.name">
                 <h2 class="mb-2 font-light leading-tight group-hover:text-primary">{{ product?.name }}</h2>

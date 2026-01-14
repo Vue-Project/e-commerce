@@ -1,4 +1,6 @@
 <script setup>
+import { computeProductReview } from "../../../utils/compute-product-star";
+
 const quantity = ref(1);
 const route = useRoute();
 
@@ -34,9 +36,7 @@ productEcomStore.fetchSingleProductData(route.params?.slug).then(async () => {
                             <h1 class="flex flex-wrap items-center gap-2 mb-2 text-2xl font-sesmibold">
                                 {{ singleProductData?.products?.name }}
                             </h1>
-                            <!-- <StarRating
-                :rating="computeProductReview(singleProductData?.products)"
-              /> -->
+                            <StarRating :rating="computeProductReview(singleProductData?.products)" />
                         </div>
                         <ProductPrice class="text-xl" :sale-price="singleProductData?.products?.price + '$'" :regular-price="'14 $'" />
                     </div>

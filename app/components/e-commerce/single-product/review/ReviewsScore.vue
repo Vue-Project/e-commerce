@@ -1,4 +1,6 @@
 <script setup>
+import { computeProductReview } from "../../../../../utils/compute-product-star";
+
 const props = defineProps({
     reviews: { type: Object, default: null },
     productId: { type: Number, default: null },
@@ -38,11 +40,11 @@ function displayMissingStars(starPercents) {
     <div>
         <h4 class="font-semibold text-2xl text-gray-900">Customer Reviews</h4>
         <div class="my-2">
-            <!-- <StarRating :rating="computeProductReview(singleProductData?.products)" class="text-sm mr-2" /> -->
+            <StarRating :rating="computeProductReview(singleProductData?.products)" class="text-sm mr-2" />
         </div>
         <div class="my-4 bars">
             <!-- percent -->
-            <div v-for="rating in displayMissingStars(singleProductData?.products?.starPercents)" :key="rating" class="flex gap-4 items-center">
+            <div v-for="rating in displayMissingStars(singleProductData?.products?.starPercent)" :key="rating" class="flex gap-4 items-center">
                 <div class="flex text-sm gap-1 items-center">
                     {{ rating?.star }}
                     <Icon class="text-yellow-400" name="ion:star" />
