@@ -67,9 +67,27 @@ export default defineEventHandler(async (event) => {
                 : {},
         }),
     ]);
+    const starRatingFilter = query?.starRating ? parseInt(query.starRating.toString()) : NaN;
+
+    const newProductArray = !Number.isNaN(starRatingFilter)
+        ? products.filter((item) => {
+              if (Array.isArray(item.stars)) {
+                  if (item.stars.length > 0) {
+                      // 4*2=8
+                      if (item.stars[0].receivedStars === starRatingFilter * item._count.reviews) {
+                          return item;
+                      }
+
+                      if (item.stars[0].receivedStars === starRatingFilter * item._count.reviews + 1) {
+                          return item;
+                      }
+                  }
+              }
+          })
+        : products;
 
     return {
-        products,
+        products: newProductArray,
         metadata: {
             total,
             page,

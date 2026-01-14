@@ -11,16 +11,16 @@ const { selectedCategories, selectedPrices, selectedColors, selectedStar } = sto
 
 async function fetchProductByCategories(categories: number[]) {
     selectedCategories.value = categories;
-    await productEcomStore.fetchProducts(selectedCategories.value, selectedPrices.value, selectedColors.value);
+    await productEcomStore.fetchProducts(selectedCategories.value, selectedPrices.value, selectedColors.value, selectedStar.value);
 }
 async function fetchProductByColors(colors: string[]) {
     selectedColors.value = colors;
-    await productEcomStore.fetchProducts(selectedCategories.value, selectedPrices.value, selectedColors.value);
+    await productEcomStore.fetchProducts(selectedCategories.value, selectedPrices.value, selectedColors.value, selectedStar.value);
 }
 
 async function fetchProductByPrice(prices: number[]) {
     selectedPrices.value = prices;
-    await productEcomStore.fetchProducts(selectedCategories.value, selectedPrices.value, selectedColors.value);
+    await productEcomStore.fetchProducts(selectedCategories.value, selectedPrices.value, selectedColors.value, selectedStar.value);
 }
 
 async function fetchProductByStars(starRating: number) {
