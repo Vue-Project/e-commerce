@@ -6,8 +6,8 @@ async function resetFilter() {
     selectedCategories.value = [];
     selectedPrices.value = [];
     selectedColors.value = [];
-    //   selectedStar.value=null
-    await productEcomStore.fetchProducts(selectedCategories.value, selectedPrices.value, selectedColors.value);
+    selectedStar.value = null;
+    await productEcomStore.fetchProducts(selectedCategories.value, selectedPrices.value, selectedColors.value, selectedStar.value);
 }
 </script>
 
