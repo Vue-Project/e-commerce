@@ -9,6 +9,7 @@ export default defineNuxtConfig({
         "@pinia/nuxt",
         "@nuxt/icon",
         "@nuxt/image",
+        "@unlok-co/nuxt-stripe",
     ],
     components: [
         {
@@ -41,6 +42,17 @@ export default defineNuxtConfig({
         public: {
             FALL_BACK_IMG_URL: process.env.FALL_BACK_IMG_URL,
             DEFAULT_USER_AVATAR: process.env.DEFAULT_USER_AVATAR,
+        },
+    },
+    stripe: {
+        // Server
+        server: {
+            key: process.env.STRIPE_SECRET_KEY,
+            options: {},
+        },
+        client: {
+            key: process.env.STRIPE_PUBLIC_KEY,
+            options: {},
         },
     },
     tailwindcss: {
