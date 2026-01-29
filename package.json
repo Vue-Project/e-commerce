@@ -22,7 +22,7 @@
     "@vueform/slider": "^2.1.10",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
-    "@vueuse/core": "^14.1.0",
+    "@vueuse/core": "^8.9.4",
     "bcryptjs": "^3.0.2",
     "chart.js": "^4.5.1",
     "is-stream": "^4.0.1",

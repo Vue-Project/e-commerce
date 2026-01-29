@@ -2,7 +2,7 @@ import { USER_EMAIL_TYPE } from "./modules/user-constant";
 // pages/api/auth/register.ts
 import prisma from "../../../lib/prisma";
 import { comparePassword } from "./modules/bcrypt";
-import { signAccessToken, signRefreshToken } from "./modules/jwtToken";
+import { signAccessToken, signRefreshToken } from "../../../utils/jwtToken";
 import { signInSchema } from "./modules/validateUser";
 
 export default defineEventHandler(async (event) => {
