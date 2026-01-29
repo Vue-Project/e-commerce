@@ -1,10 +1,13 @@
 <template>
     <div class="bg-slate-200 h-screen">
-        <h1>payments</h1>
+        <CustomerOrder :userOders="paymentData?.userOrders" />
     </div>
 </template>
 
 <script setup>
+const checkoutStore = useCheckoutStore();
+const { paymentData } = storeToRefs(checkoutStore);
+await checkoutStore.fetchPaymentData();
 definePageMeta({
     layout: "admin",
 });
