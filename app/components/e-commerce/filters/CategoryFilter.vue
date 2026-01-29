@@ -22,6 +22,16 @@ const checkboxChanged = (categoryId) => {
         emit("fetchProducts", selectedCategories.value);
     }
 };
+
+const resetCategories = () => {
+    selectedCategories.value = [];
+    // Uncheck all checkboxes
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => (checkbox.checked = false));
+    emit("fetchProducts", []);
+};
+
+defineExpose({ resetCategories });
 </script>
 
 <template>
