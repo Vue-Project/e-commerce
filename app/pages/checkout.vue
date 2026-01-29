@@ -19,7 +19,7 @@ await checkoutStore.fetchCustomerOder(userId);
 
                     <div class="w-full mt-4">
                         <label for="email">E-mail</label>
-                        <input placeholder="johndoe@email.com" autocomplete="email" disabled="true" v-model="userEmail" type="email" name="email" required />
+                        <input placeholder="johndoe@email.com" autocomplete="email" disabled="true" v-model="userEmail" type="email" name="email" required  aria-label=" for customer email""/>
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@ await checkoutStore.fetchCustomerOder(userId);
 
                 <StripeElement />
 
-                <CustomerOrder :userOders="customerOderData?.userOders" />
+                <CustomerOrder :userOders="customerOderData?.userOrders" />
             </div>
 
             <OrderSummary>

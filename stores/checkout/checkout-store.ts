@@ -11,7 +11,7 @@ export const useCheckoutStore = defineStore("checkout-store", () => {
     }
 
     async function fetchCustomerOder(userId: number) {
-        const { data, refresh } = await useFetch("/api/payment/get-payments", {
+        const { data, refresh } = await useFetch("/api/payment/get-payment", {
             query: {
                 userId: userId,
             },
