@@ -1,5 +1,5 @@
-import prisma from "../../../lib/prisma";
-import { USER_ROLE } from "../../api/auth/modules/user-constant";
+import prisma from "../../../../lib/prisma";
+import { USER_ROLE } from "../../auth/modules/user-constant";
 
 export default defineEventHandler(async (event) => {
     const [paymentsByDate, countPayment, totalEarnAmount, countCustomer] = await fetchDashBoardData();
