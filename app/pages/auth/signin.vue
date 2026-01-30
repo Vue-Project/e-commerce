@@ -35,7 +35,6 @@ const submitForm = async () => {
         });
 
         const userRole = res?.data?.user?.role;
-        console.log("userRole:", res);
         if (userRole === "CUSTOMER") {
             userCookie.value = res;
             router.push("/");
