@@ -1,6 +1,82 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     compatibilityDate: "2025-07-15",
+    app: {
+        head: {
+            charset: "utf-8",
+            viewport: "width=device-width, initial-scale=1",
+            title: "Nike Store - Official Shoes, Clothing & Gear",
+            titleTemplate: "%s | Nike Store",
+            meta: [
+                {
+                    name: "description",
+                    content: "Shop Nike shoes, clothing & gear. Official Nike store with the latest releases, exclusive styles, and free shipping on orders over $50.",
+                },
+                {
+                    name: "keywords",
+                    content: "Nike, Nike shoes, running shoes, sneakers, athletic wear, sports clothing, Air Force 1, Air Max, Jordan, Nike Store",
+                },
+                { name: "author", content: "Nike, Inc." },
+
+                // Open Graph / Facebook
+                { property: "og:type", content: "website" },
+                { property: "og:site_name", content: "Nike Store" },
+                { property: "og:locale", content: "en_US" },
+
+                // Twitter
+                { name: "twitter:card", content: "summary_large_image" },
+                { name: "twitter:site", content: "@Nike" },
+                { name: "twitter:creator", content: "@Nike" },
+
+                // Mobile
+                { name: "theme-color", content: "#111111" },
+                { name: "apple-mobile-web-app-title", content: "Nike Store" },
+            ],
+
+            link: [
+                // Favicon - Multiple sizes for different devices
+                { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+                { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
+                { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
+                { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+                { rel: "manifest", href: "/site.webmanifest" },
+                { rel: "mask-icon", href: "/safari-pinned-tab.svg", color: "#111111" },
+
+                // Preconnect for performance
+                { rel: "preconnect", href: "https://static.nike.com" },
+                { rel: "preconnect", href: "https://fonts.googleapis.com" },
+
+                // Canonical URL (will be set dynamically per page)
+            ],
+
+            script: [
+                // Schema.org structured data for better SEO
+                {
+                    type: "application/ld+json",
+                    children: JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@type": "Store",
+                        name: "Nike Store",
+                        description: "Official Nike online store",
+                        url: "https://your-nike-store.com",
+                        brand: {
+                            "@type": "Brand",
+                            name: "Nike",
+                        },
+                        priceRange: "$$",
+                    }),
+                },
+            ],
+
+            // Additional HTML attributes
+            htmlAttrs: {
+                lang: "en",
+            },
+            bodyAttrs: {
+                class: "nike-store",
+            },
+        },
+    },
     nitro: {
         experimental: {
             websocket: true,
