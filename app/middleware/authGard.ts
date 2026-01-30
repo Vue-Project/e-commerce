@@ -5,7 +5,6 @@ export async function authGuard(event: H3Event) {
     const authHeader = getHeader(event, "authorization");
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
-        window.location.href = "/admin/signin";
         throw createError({ statusCode: 401, statusMessage: "Invalid token" });
     }
 
