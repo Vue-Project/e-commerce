@@ -34,9 +34,16 @@ const submitForm = async () => {
             body: JSON.stringify(loginInput.value),
         });
 
-        console.log("res", res);
-        userCookie.value = res;
-        router.push("/");
+        const userRole = res?.data?.user?.role;
+        console.log("userRole:", res);
+        if (userRole === "CUSTOMER") {
+            userCookie.value = res;
+            router.push("/");
+        } else {
+            console.log(res);
+            userCookie.value = res;
+            router.push("/admin/dashboard");
+        }
     } catch (error) {
         showSignInAndSignUpError(error);
         // console.log("error", errors);

@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
                 accessToken: accessToken,
                 refreshToken: refreshToken,
             },
-            user: { name: userExist.name, email: userExist.email, id: userExist.id },
+            user: { name: userExist.name, email: userExist.email, id: userExist.id, role: userExist.role },
             isLoggedIn: true,
         };
         return { message: " User logged successfully", data };
