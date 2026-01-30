@@ -5,12 +5,10 @@
 </template>
 
 <script setup>
+definePageMeta({ layout: "admin", middleware: "admin" });
 const checkoutStore = useCheckoutStore();
 const { paymentData } = storeToRefs(checkoutStore);
 await checkoutStore.fetchPaymentData();
-definePageMeta({
-    layout: "admin",
-});
 </script>
 
 <style lang="scss" scoped></style>

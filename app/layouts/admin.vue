@@ -8,9 +8,6 @@ import ProductIcon from "~/components/icons/ProductIcon.vue";
 import UserIcon from "~/components/icons/UserIcon.vue";
 import { userCookieSettings } from "~~/utils/user.cookie.settings";
 
-// Apply admin middleware to protect admin routes
-defineRouteMiddleware(["admin"]);
-
 const userCookie = useCookie("user", userCookieSettings);
 const config = useRuntimeConfig();
 

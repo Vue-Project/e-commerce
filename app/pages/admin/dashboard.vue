@@ -4,7 +4,7 @@ import { Chart, registerables } from "chart.js";
 import { useWebSocket } from "@vueuse/core";
 
 Chart.register(...registerables);
-definePageMeta({ layout: "admin" });
+definePageMeta({ layout: "admin", middleware: "admin" });
 
 const loading = ref(false);
 

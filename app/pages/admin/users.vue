@@ -8,10 +8,8 @@
 </template>
 
 <script setup>
+definePageMeta({ layout: "admin", middleware: "admin" });
 import { promptUser } from "../../../utils/sweetAlert";
-definePageMeta({
-    layout: "admin",
-});
 // user store to manage user modal state
 const userStore = useUserStore();
 const { usersData, userError } = storeToRefs(userStore);

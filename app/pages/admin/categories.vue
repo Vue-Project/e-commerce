@@ -9,9 +9,7 @@
 </template>
 
 <script setup>
-definePageMeta({
-    layout: "admin",
-});
+definePageMeta({ layout: "admin", middleware: "admin" });
 const categoryStore = useCategoryStore();
 const { categoryInput, edit } = storeToRefs(categoryStore);
 const { data, getCategory } = await categoryStore.fetchCategories();

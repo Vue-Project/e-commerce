@@ -19,6 +19,7 @@
 import { promptUser } from "../../../utils/sweetAlert";
 definePageMeta({
     layout: "admin",
+    middleware: "admin",
 });
 // product store to manage product modal state
 const productStore = useProductStore();
