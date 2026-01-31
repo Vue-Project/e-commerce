@@ -7,7 +7,7 @@ import { useWebSocket } from "@vueuse/core";
 import { successMsg } from "~~/utils/toast-notfacation";
 
 const wsUrl = "ws://localhost:3000/api/admin/dashboard/_ws";
-const { status, data: wsData, send, open, close } = useWebSocket(wsUrl);
+const { status, data: wsData, send, open, close } = process.client ? useWebSocket(wsUrl) : {};
 
 const { stripe } = useClientStripe();
 
